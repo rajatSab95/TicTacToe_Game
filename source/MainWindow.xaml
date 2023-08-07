@@ -1,0 +1,198 @@
+﻿<ribbon:RibbonWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+		xmlns:local="clr-namespace:wpf_sandbox"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="wpf_sandbox.MainWindow"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit.PropertyGrid;assembly=Xceed.Wpf.Toolkit"
+        Title="WPF Sandbox"
+		DataContext="{Binding RelativeSource={RelativeSource Self}}"
+		x:Name="RibbonWindow"
+		Width="900" Height="598" Icon="pack://application:,,,/ts3d.ico">
+
+    <ribbon:RibbonWindow.Resources>
+        <Style x:Key='AboutButtonStyle' TargetType='{x:Type Button}'>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="BorderBrush" Value ="Transparent"/>
+            <Setter Property="Opacity" Value=".85"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="7" BorderThickness="2" BorderBrush="Black" x:Name="Bd" Background="{TemplateBinding Panel.Background}">
+                            <ContentPresenter Margin ="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ribbon:RibbonWindow.Resources>
+
+    <DockPanel>
+        <ribbon:Ribbon x:Name="Ribbon" DockPanel.Dock="Top">
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu SmallImageSource="pack://application:,,,/ts3d.ico">
+                    <ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
+                        <ribbon:RibbonGallery>
+                            <ribbon:RibbonGalleryCategory Header="Recently Opened Files"
+								Background="Transparent"
+								x:Name="RecentFiles">
+                                <!-- RibbonGalleryItem(s) created at runtime -->
+                                <ribbon:RibbonGalleryCategory.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ribbon:RibbonGalleryCategory.ItemsPanel>
+                            </ribbon:RibbonGalleryCategory>
+                        </ribbon:RibbonGallery>
+                    </ribbon:RibbonApplicationMenu.AuxiliaryPaneContent>
+                    <ribbon:RibbonApplicationMenuItem Header="_New" Command="{Binding NewCommand}" ImageSource="pack://application:,,,/Images/LargeIcon.png" />
+                    <ribbon:RibbonApplicationMenuItem Header="_Open" Command="{Binding FileOpenCommand}" ImageSource="pack://application:,,,/Images/LargeIcon.png" />
+                    <ribbon:RibbonApplicationMenuItem Header="_Save As" Command="{Binding FileSaveCommand}" ImageSource="pack://application:,,,/Images/LargeIcon.png" />
+                    <ribbon:RibbonApplicationMenuItem Header="_Print" Command="{Binding FilePrintCommand}" ImageSource="pack://application:,,,/Images/LargeIcon.png" />
+                    <ribbon:RibbonSeparator />
+                    <ribbon:RibbonApplicationMenuItem Header="E_xit" Command="{Binding ExitCommand}" ImageSource="pack://application:,,,/Images/LargeIcon.png" />
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+
+            <ribbon:RibbonTab Header="Operators" d:IsHidden="True">
+                <ribbon:RibbonGroup Header="Navigation" d:IsHidden="True">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonToggleButton Command="{Binding OrbitCommand}" IsChecked="{Binding IsCurrentOpOrbit, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/IconOrbit.png" Label="Orbit" />
+                    <ribbon:RibbonToggleButton Command="{Binding PanCommand}" IsChecked="{Binding IsCurrentOpPan, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/IconPan.png" Label="Pan" />
+                    <ribbon:RibbonToggleButton Command="{Binding ZoomAreaCommand}" IsChecked="{Binding IsCurrentOpZoomArea, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/IconZoomArea.png" Label="Zoom Area" />
+                    <ribbon:RibbonToggleButton Command="{Binding FlyCommand}" IsChecked="{Binding IsCurrentOpFly, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/paper_plane.png" Label="Fly" />
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup d:IsHidden="True">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonButton Command="{Binding HomeCommand}" LargeImageSource="pack://application:,,,/Images/IconHome.png" Label="Home" />
+                    <ribbon:RibbonButton Command="{Binding ZoomFitCommand}" LargeImageSource="pack://application:,,,/Images/IconZoomFit.png" Label="Zoom Fit" />
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup Header="Selection" d:IsHidden="True">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonToggleButton Command="{Binding PointSelectCommand}" IsChecked="{Binding IsCurrentOpSelectPoint, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/IconSelectPoint.png" Label="Point" />
+                    <ribbon:RibbonToggleButton Command="{Binding AreaSelectCommand}" IsChecked="{Binding IsCurrentOpSelectArea, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/IconSelectArea.png" Label="Area" />
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup Header="Browsers" d:IsHidden="True">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonToggleButton Name="SegmentBrowserButton" Command="{Binding SegmentBrowserCommand}" LargeImageSource="pack://application:,,,/Images/IconBrowser.png" Label="Segment Browser" />
+                    <ribbon:RibbonToggleButton Name="ModelBrowserButton" Command="{Binding ModelBrowserCommand}" LargeImageSource="pack://application:,,,/Images/IconBrowser.png" Label="Model Browser" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="Modes">
+                <ribbon:RibbonGroup Header="Modes">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonToggleButton Command="{Binding SimpleShadowModeCommand}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="Simple Shadow" />
+                    <ribbon:RibbonToggleButton x:Name="FrameRateButton" Command="{Binding FrameRateModeCommand}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="Frame Rate" />
+                    <ribbon:RibbonToggleButton x:Name="SmoothButton" Command="{Binding SmoothModeCommand}" IsChecked="{Binding IsSmooth, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="Smooth" />
+                    <ribbon:RibbonToggleButton x:Name="HiddenLineButton" Command="{Binding HiddenLineModeCommand}" IsChecked="{Binding IsHidden, Mode=TwoWay}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="Hidden Line" />
+					<ribbon:RibbonToggleButton Command="{Binding EyeDomeModeCommand}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="Eye Dome Lighting" />
+				</ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="User Code" d:IsHidden="True">
+                <ribbon:RibbonGroup Header="User Code">
+                    <ribbon:RibbonGroup.GroupSizeDefinitions>
+                        <ribbon:RibbonGroupSizeDefinition>
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                            <ribbon:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True" />
+                        </ribbon:RibbonGroupSizeDefinition>
+                    </ribbon:RibbonGroup.GroupSizeDefinitions>
+                    <ribbon:RibbonButton Command="{Binding User1Command}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="User Code 1" />
+                    <ribbon:RibbonButton Command="{Binding User2Command}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="User Code 2" />
+                    <ribbon:RibbonButton Command="{Binding User3Command}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="User Code 3" />
+                    <ribbon:RibbonButton Command="{Binding User4Command}" LargeImageSource="pack://application:,,,/Images/LargeIcon.png" Label="User Code 4" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+
+        <Grid Name="_canvasBrowserGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="225"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="225"/>
+            </Grid.ColumnDefinitions>
+            <Grid Name="_segmentBrowserAndPropertiesGrid" Grid.Column="0" Background="#FFDFE9F5" Margin="0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Name="_segmentBrowserGrid" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <DockPanel Name="_comboBoxAndCheckBoxPanel" Grid.Row="0">
+                        <ComboBox Name="RootComboBox" SelectionChanged="RootComboBox_SelectionChanged" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="5,5,0,2.5" VerticalAlignment="Top" Width="120">
+                            <ComboBoxItem Content="Model" />
+                            <ComboBoxItem Content="View" />
+                            <ComboBoxItem Content="Layout" />
+                            <ComboBoxItem Content="Canvas" />
+                        </ComboBox>
+                        <CheckBox Name="PropertiesCheckBox" Command="{Binding PropertiesToggleCommand}" Content="Properties" HorizontalAlignment="Left" Margin="5,8,0,2.5" VerticalAlignment="Top" />
+                    </DockPanel>
+                    <TreeView Name="_segmentTreeView" Grid.Row="1" Margin="5,2.5,5,5" PreviewMouseRightButtonDown="OnSegmentBrowserPreviewMouseRightButtonDown" PreviewKeyDown="OnSegmentBrowserPreviewKeyDown"/>
+                </Grid>
+                <GridSplitter Name="_horizontalSplitter" Grid.Row="1" ResizeDirection="Rows" Height="2" Background="LightSlateGray" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Grid Name="_propertiesPanelGrid" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <xctk:PropertyGrid Name="PropertyGrid" Grid.Row="0" Margin="5" ShowSortOptions="False" ShowSearchBox="False" ShowSummary="False" IsCategorized="False" SelectedObjectChanged="PropertyGrid_SelectedObjectChanged" PropertyValueChanged="PropertyGrid_PropertyValueChanged" />
+                    <Button Name="PropertiesApply" Grid.Row="1" Command="{Binding PropertiesApplyCommand}" HorizontalAlignment="Left" Margin="5,0,0,5" VerticalAlignment="Bottom" Width="60">Apply</Button>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Column="1" ResizeDirection="Columns" Width="2" HorizontalAlignment="Center" Background="LightSlateGray" />
+			<DockPanel Name="_canvasPanel"  Grid.Column="2" HorizontalAlignment="Stretch" Background="#FFDFE9F5">
+				<Border x:Name="_mainBorder" Margin="5" BorderThickness="2" BorderBrush="Black"/>
+			</DockPanel>
+            <GridSplitter Grid.Column="3" ResizeDirection="Columns" Width="2" HorizontalAlignment="Center" Background="LightSlateGray" />
+            <Grid Name="_modelBrowserGrid" Grid.Column="4" Background="#FFDFE9F5" Margin="0,0">
+                <TabControl Margin="5" TabStripPlacement="Bottom">
+                    <TabItem Header="Model Browser">
+                        <TreeView Name="_modelTreeView" Margin="-3" PreviewMouseRightButtonDown="OnModelBrowserPreviewMouseRightButtonDown"/>
+                    </TabItem>
+                    <TabItem Header="Configurations">
+                        <TreeView Name="_configurationTreeView" Margin="-3" MouseDoubleClick="OnMouseDoubleClick"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+
+    </DockPanel>
+</ribbon:RibbonWindow>

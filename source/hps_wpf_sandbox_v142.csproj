@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Win32</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A73C4AD5-6C62-460D-8CC1-29E8EF452F43}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>hps_wpf_sandbox</RootNamespace>
+    <AssemblyName>hps_wpf_sandbox</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\win64_v142d\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;_M_X64;WIN64;VS2019</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\win64_v142\</OutputPath>
+    <DefineConstants>TRACE;_M_X64;WIN64;VS2019</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ts3d.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="hps_cs_core" />
+    <Reference Include="hps_cs_sprk" />
+    <Reference Include="hps_cs_sprk_ops" />
+    <Reference Include="hps_cs_sprk_d3dimage" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="..\..\..\include\hoops_license.cs" />
+    <Compile Include="Commands\DemoCommands.cs" />
+    <Compile Include="Commands\DemoModeCommands.cs" />
+    <Compile Include="Commands\DemoUserCommands.cs" />
+    <Compile Include="ExchangeImportDialog\ExchangeImportDialog.xaml.cs">
+      <DependentUpon>ExchangeImportDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelBrowser\ConfigurationBrowser.cs" />
+    <Compile Include="ModelBrowser\ModelBrowser.cs" />
+    <Compile Include="ProgressBar\ProgressBar.xaml.cs">
+      <DependentUpon>ProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Operators\SandboxHighlightOperator.cs" />
+    <Compile Include="SegmentBrowser\Properties.cs" />
+    <Compile Include="SegmentBrowser\PropertiesPanel.cs" />
+    <Compile Include="SegmentBrowser\DynamicProperty.cs" />
+    <Compile Include="SprocketsWPFControl.cs" />
+    <Compile Include="SegmentBrowser\SegmentBrowser.cs" />
+    <Page Include="ExchangeImportDialog\ExchangeImportDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ProgressBar\ProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\attribute.bmp" />
+    <Resource Include="Images\geometry.bmp" />
+    <Resource Include="Images\group.bmp" />
+    <Resource Include="Images\highlighted_geometry.bmp" />
+    <Resource Include="Images\highlighted_group.bmp" />
+    <Resource Include="Images\highlighted_segment.bmp" />
+    <Resource Include="Images\include.bmp" />
+    <Resource Include="Images\LargeIcon.png" />
+    <Resource Include="Images\reference.bmp" />
+    <Resource Include="Images\segment.bmp" />
+    <Resource Include="Images\SmallIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cadballoon.png" />
+    <Resource Include="Images\cadFastener.png" />
+    <Resource Include="Images\cadlinewelding.png" />
+    <Resource Include="Images\cadlocator.png" />
+    <Resource Include="Images\cadmeasurementpoint.png" />
+    <Resource Include="Images\cadrefer.png" />
+    <Resource Include="Images\cadrough.png" />
+    <Resource Include="Images\cadspotwelding.png" />
+    <Resource Include="Images\cadtoler.png" />
+    <Resource Include="Images\cadview.png" />
+    <Resource Include="Images\dim_coordinate.png" />
+    <Resource Include="Images\dim_distance.png" />
+    <Resource Include="Images\dir_geom.png" />
+    <Resource Include="Images\dir_mark.png" />
+    <Resource Include="Images\dir_product.png" />
+    <Resource Include="Images\dir_product2.png" />
+    <Resource Include="Images\hidden_cadballoon.png" />
+    <Resource Include="Images\hidden_cadFastener.png" />
+    <Resource Include="Images\hidden_cadlinewelding.png" />
+    <Resource Include="Images\hidden_cadlocator.png" />
+    <Resource Include="Images\hidden_cadmeasurementpoint.png" />
+    <Resource Include="Images\hidden_cadrefer.png" />
+    <Resource Include="Images\hidden_cadrough.png" />
+    <Resource Include="Images\hidden_cadspotwelding.png" />
+    <Resource Include="Images\hidden_cadtoler.png" />
+    <Resource Include="Images\hidden_dim_coordinate.png" />
+    <Resource Include="Images\hidden_dim_distance.png" />
+    <Resource Include="Images\hidden_dir_geom.png" />
+    <Resource Include="Images\hidden_dir_product.png" />
+    <Resource Include="Images\hidden_dir_product2.png" />
+    <Resource Include="Images\hidden_img_axis.png" />
+    <Resource Include="Images\hidden_img_compcurve.png" />
+    <Resource Include="Images\hidden_img_curv.png" />
+    <Resource Include="Images\hidden_img_direction.png" />
+    <Resource Include="Images\hidden_img_drawing_model.png" />
+    <Resource Include="Images\hidden_img_drawing_sheet.png" />
+    <Resource Include="Images\hidden_img_drawing_view.png" />
+    <Resource Include="Images\hidden_img_plan.png" />
+    <Resource Include="Images\hidden_img_points_cloud.png" />
+    <Resource Include="Images\hidden_img_solid.png" />
+    <Resource Include="Images\hidden_img_unkn.png" />
+    <Resource Include="Images\hidden_markup.png" />
+    <Resource Include="Images\il_class.png" />
+    <Resource Include="Images\img_axis.png" />
+    <Resource Include="Images\img_compcurve.png" />
+    <Resource Include="Images\img_curv.png" />
+    <Resource Include="Images\img_direction.png" />
+    <Resource Include="Images\img_drawing_model.png" />
+    <Resource Include="Images\img_drawing_sheet.png" />
+    <Resource Include="Images\img_drawing_view.png" />
+    <Resource Include="Images\img_plan.png" />
+    <Resource Include="Images\img_points_cloud.png" />
+    <Resource Include="Images\img_solid.png" />
+    <Resource Include="Images\img_unkn.png" />
+    <Resource Include="Images\markup.png" />
+    <Resource Include="Images\pmiview_productview.png" />
+    <Resource Include="Images\IconBrowser.png" />
+    <Resource Include="Images\IconHome.png" />
+    <Resource Include="Images\static_model.bmp" />
+    <Resource Include="Images\walking.png" />
+    <Resource Include="Images\paper_plane.png" />
+    <Resource Include="ts3d.ico" />
+    <Resource Include="Images\IconAbout.png" />
+    <Resource Include="Images\IconOrbit.png" />
+    <Resource Include="Images\IconPan.png" />
+    <Resource Include="Images\IconSelectPoint.png" />
+    <Resource Include="Images\IconSelectArea.png" />
+    <Resource Include="Images\IconZoomFit.png" />
+    <Resource Include="Images\IconZoomArea.png" />
+    <Content Include="hps_wpf_sandbox_config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  
+</Project>
